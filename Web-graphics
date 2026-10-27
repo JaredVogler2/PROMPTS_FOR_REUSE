@@ -1,0 +1,635 @@
+# GOAL: WORLD-CLASS INTERACTIVE 3D VISUAL EXPERIENCE
+
+PROJECT: [INSERT PROJECT NAME AND BRIEF DESCRIPTION]
+VISUAL DIRECTION: [INSERT DESIRED AESTHETIC, OR INFER THE MOST COMPELLING ART DIRECTION]
+PRIMARY INTERACTIONS: [INSERT GAMEPLAY, PHYSICS, OR INTERACTIVE FEATURES]
+TARGETS: Modern desktop browsers and iPhone Safari
+REFERENCES: [OPTIONAL IMAGES, WEBSITES, OR ART STYLE REFERENCES]
+
+You are acting as a principal real-time graphics engineer, technical artist, creative director, interaction designer, and performance engineer.
+
+Your mission is NOT merely to make functional 3D graphics. Your mission is to deliver a visually exceptional, fluid, engaging, production-quality browser experience that looks deliberately art-directed, feels alive, and is immediately impressive.
+
+Treat visual quality as a primary engineering deliverable, not as polish to be considered after functionality is complete.
+
+========================================================
+1. REPOSITORY DISCOVERY & ARCHITECTURE
+========================================================
+
+Before changing code:
+- Inspect the repository structure, frameworks, dependencies, assets, shaders, and existing rendering pipeline.
+- Identify the current graphics bottlenecks and visual deficiencies.
+- Preserve working gameplay, mechanics, state, and user flows.
+- Verify compatibility of existing library versions before upgrading anything.
+- If this is a new project, design a clean architecture suitable for expansion.
+
+PREFERRED STACK (WHEN APPROPRIATE):
+- TypeScript
+- React
+- React Three Fiber
+- Three.js
+- @react-three/drei
+- A compatible postprocessing pipeline
+- Rapier physics when genuine physical simulation is required
+- glTF/GLB asset delivery
+- Vite or the project's existing appropriate build system
+
+Use direct Three.js APIs or custom GPU shaders wherever R3F abstractions are inappropriate.
+
+React Three Fiber is an orchestration layer, not a substitute for advanced rendering.
+
+Favor stable, compatible packages and WebGL2 browser support. Do not make experimental WebGPU capabilities mandatory. WebGPU can be an optional enhancement with a working fallback.
+
+========================================================
+2. NON-NEGOTIABLE VISUAL QUALITY BENCHMARK
+========================================================
+
+The completed experience should visually resemble a polished commercial indie game, premium interactive exhibition, or high-end cinematic simulation appropriate to the subject.
+
+It must look impressive:
+- In a still screenshot
+- While the camera is moving
+- While objects are animating
+- During user interactions
+- On a desktop monitor
+- On a portrait-oriented iPhone
+
+The experience must demonstrate:
+
+A. A coherent, distinctive visual identity.
+B. Strong composition and immediate visual hierarchy.
+C. Attractive geometry and believable or deliberately stylized materials.
+D. Sophisticated lighting with convincing dimensional depth.
+E. Purposeful movement that makes the environment feel alive.
+F. High-quality interactions with visible physical or visual consequences.
+G. Smooth transitions without distracting discontinuities.
+H. Carefully integrated, polished UI rather than generic overlays.
+
+DO NOT ACCEPT:
+- An assortment of floating primitive cubes and spheres as the final art.
+- Default-looking Three.js example scenes.
+- Flat, uniform lighting without atmospheric depth.
+- Generic green ground planes and featureless backgrounds.
+- Placeholder materials in the final experience.
+- A motionless environment unless stillness is artistically intentional.
+- Excessive bloom that obscures geometry.
+- Low-effort particle effects consisting of a handful of random dots.
+- A visually empty world with isolated objects and no environmental storytelling.
+- Poor mobile camera framing, tiny controls, or clipped UI.
+- "It renders successfully" as sufficient evidence of completion.
+
+Simple geometry is allowed when it intentionally supports a cohesive visual style. It must not be used simply because creating finished assets requires more effort.
+
+========================================================
+3. ART DIRECTION & SCENE COMPOSITION
+========================================================
+
+Establish a documented art direction before major scene construction.
+
+Define:
+- Artistic style and visual references
+- Primary, secondary, and accent colors
+- World scale and camera perspective
+- Materials and texture language
+- Lighting direction and atmosphere
+- Environmental storytelling
+- Foreground, midground, and background elements
+- Focal point and areas of visual interest
+- Animation language and overall motion character
+
+Every scene needs a deliberate composition.
+
+Create identifiable focal points and layered visual depth.
+
+Use foreground silhouettes, background architecture, atmospheric perspective, terrain variation, set dressing, and selective color contrast where appropriate.
+
+Design camera positions that immediately show the strongest part of the experience.
+
+Avoid default camera positions that hide important objects or make the composition feel accidental.
+
+Use high visual density where the viewer should focus and restrained detail elsewhere.
+
+Apply recognizable visual hierarchy without sacrificing scene richness.
+
+On mobile, compose the scene specifically for a narrower aspect ratio. Do not simply crop a desktop composition.
+
+========================================================
+4. PRODUCTION-QUALITY ASSETS
+========================================================
+
+Prioritize purpose-built, cohesive 3D assets over disconnected generic models.
+
+Use high-quality glTF/GLB assets, carefully designed procedural geometry, or custom modeled components.
+
+Where suitable, use:
+- PBR material workflows
+- Base color, normal, roughness, metallic, and ambient-occlusion maps
+- Emissive maps and animated emissive properties
+- Surface imperfections and material variation
+- Appropriate beveling and silhouette detail
+- Texture atlases and trim sheets
+- Level-of-detail meshes
+- Mesh instancing for repeated geometry
+
+For organic objects, use appropriately smoothed and articulated geometry.
+
+For machinery, buildings, and hard-surface objects, create convincing structure, proportions, and bevels.
+
+For stylized experiences, prioritize clean silhouettes, intentional proportions, and attractive color variation.
+
+Assets must be compatible with browser rendering and optimized for the intended hardware.
+
+Use legally permitted assets and preserve required attribution.
+
+Do not download copyrighted commercial game assets without authorization.
+
+Never disguise placeholder art as completed production assets. If an essential asset is unavailable, create the best feasible original substitute and explicitly report the limitation.
+
+========================================================
+5. ADVANCED LIGHTING & RENDERING
+========================================================
+
+Implement a visually appropriate real-time rendering pipeline.
+
+Evaluate and use, where beneficial:
+
+LIGHTING:
+- Physically coherent key, fill, and rim lighting
+- Environment illumination using HDRI and PMREM
+- Soft, properly biased shadows
+- Selective contact shadows
+- Ambient lighting balanced with direct illumination
+- Emissive materials where visually relevant
+- Directional color contrast
+- Day/night or other dynamic lighting systems when appropriate
+
+MATERIALS:
+- Metallic/roughness PBR
+- Material-specific reflections
+- Normal mapping and surface variation
+- Transmission and transparency only when justified
+- Animated material properties
+- Custom shader effects for special surfaces
+
+ATMOSPHERE:
+- Depth-aware fog
+- Atmospheric perspective
+- Sky gradients or sky shaders
+- Localized haze and light shafts where feasible
+- Carefully controlled volumetric-looking effects
+- Weather and environmental ambience when relevant
+
+IMAGE PIPELINE:
+- Correct linear/sRGB color management
+- Consistent tone mapping, such as ACES or AgX when supported
+- Appropriate exposure and contrast
+- Selective bloom rather than excessive global glow
+- Ambient occlusion where cost-effective
+- Antialiasing appropriate to the platform
+- Carefully selected postprocessing
+
+Use a compatible postprocessing chain and avoid double tone mapping or incorrect color conversions.
+
+Do not implement every effect automatically. Select effects based on demonstrated visual benefit relative to GPU cost.
+
+Where expensive effects cannot run well on mobile, provide simplified alternatives rather than completely degrading the art direction.
+
+========================================================
+6. MOTION, ANIMATION & LIVING ENVIRONMENTS
+========================================================
+
+The experience must feel alive even when the user is not actively interacting, unless the project's intended behavior calls for stillness.
+
+Build layered environmental animation as appropriate:
+
+- Wind affecting foliage, cloth, or atmospheric elements
+- Flowing water or other fluid-looking surfaces
+- Animated lights and emission
+- Animated machinery
+- Background character or environmental activity
+- Subtle particle drift
+- Terrain or world transformations
+- Procedural movement
+- Secondary motion
+- Camera micro-movement when appropriate
+- Physical responses to user actions
+
+ANIMATION QUALITY:
+- Use delta-time-based updates.
+- Implement coherent acceleration, deceleration, easing, and damping.
+- Avoid robotic linear movements unless intentional.
+- Add anticipation, follow-through, and secondary motion.
+- Blend animation states instead of abruptly snapping.
+- Ensure moving elements do not visually penetrate geometry unintentionally.
+- Use procedural motion where it offers appropriate variety.
+- Maintain continuity when animations overlap.
+- Support reduced-motion preferences.
+
+Every major interaction should provide an understandable visual response.
+
+A world should not feel static merely because the user has stopped tapping or clicking.
+
+However, never add meaningless movement that damages clarity, usability, or performance.
+
+========================================================
+7. INTERACTIVE PHYSICS & USER FEEDBACK
+========================================================
+
+If the project includes physical or spatial interaction, implement behavior that feels consistent, understandable, and satisfying.
+
+Examples:
+- Grabbing, dragging, rotating, or manipulating objects
+- Rigid-body collisions
+- Momentum and inertia
+- Springs and constraints
+- Destructible or deformable objects where feasible
+- Elemental effects, forces, or particle interactions
+- Spatial selection and highlighting
+- Responsive world-state changes
+- Camera reactions to important events
+
+Use a fixed-timestep physics simulation when appropriate.
+
+Do not confuse visually simulated physics with physically accurate simulation. Select the fidelity necessary for the project.
+
+Avoid expensive CPU-to-GPU transfer patterns.
+
+Keep animation, physics state, and rendering state appropriately separated.
+
+Provide polished feedback:
+- Selection and hover affordances
+- Object highlighting
+- Impact reactions
+- Visual trails where relevant
+- Particle bursts
+- Contextual camera movement
+- Transient lighting changes
+- Smooth state transitions
+
+Feedback must communicate cause and effect, not merely decorate the scene.
+
+========================================================
+8. CAMERA DESIGN & CONTROL
+========================================================
+
+Treat the camera as part of the product experience.
+
+Choose the appropriate camera architecture:
+- Orbit
+- Third-person
+- First-person
+- Isometric
+- Cinematic
+- Follow camera
+- Strategic overview
+- Custom hybrid
+
+Support deliberate camera limits, collision avoidance, and intuitive framing.
+
+Use smooth damping and appropriately controlled movement.
+
+Ensure the camera never unintentionally clips through important geometry or leaves the user looking into an empty environment.
+
+On touch devices:
+- Differentiate taps, drags, and pinches.
+- Prevent browser scrolling only where the interaction requires it.
+- Support touch-first manipulation.
+- Avoid requiring hover.
+- Provide accessible reset/recenter behavior.
+
+Use camera transitions to enhance comprehension and delight, not to disorient the user.
+
+========================================================
+9. PARTICLES, SHADERS & VISUAL EFFECTS
+========================================================
+
+Build effects using the most appropriate technique, potentially including:
+- Instanced geometry
+- ShaderMaterial or compatible node/shader materials
+- GPU-efficient animated vertex displacement
+- Procedural noise
+- Time-dependent uniforms
+- Particle systems
+- Texture-sheet animation
+- Trails, ribbons, or transient geometry
+- Depth-aware blending
+- Selective additive blending
+- Distortion effects where suitable
+
+Effects should be integrated with lighting, scene depth, camera perspective, and physical interactions.
+
+Examples of polished effects include:
+- Energy fields that pulse and react
+- Fire with evolving shape and illumination
+- Water with motion and surface shading
+- Dust illuminated by environmental light
+- Shockwaves that communicate force
+- Glowing trails that follow moving objects
+- Reactive surfaces that ripple on contact
+
+Do not create visually impressive effects by brute force alone. Select scalable implementations that perform acceptably on mobile.
+
+========================================================
+10. RESPONSIVE DESIGN & iPHONE REQUIREMENTS
+========================================================
+
+Develop desktop and mobile as first-class experiences.
+
+Test at representative viewport sizes:
+- Desktop: 1920x1080 and 1440x900
+- Laptop: 1366x768
+- iPhone portrait: 390x844 and 393x852
+- iPhone landscape: approximately 844x390
+- Small mobile: 360x740
+
+Account for device pixel ratio, orientation, safe areas, dynamic browser bars, and touch controls.
+
+Require:
+- No horizontal overflow
+- No clipped primary buttons or critical elements
+- No unintentionally hidden game objects
+- Touch targets approximately 44x44 CSS pixels or larger
+- Readable overlays
+- Responsive camera framing
+- Clear gesture affordances
+- Appropriate pause/resume behavior
+- Recovered rendering after browser tab suspension
+- Correct handling of WebGL context loss where feasible
+
+Consider landscape mode where gameplay benefits from it, but ensure portrait users receive a useful and attractive experience.
+
+Mobile must not look like a broken, reduced-size desktop application.
+
+========================================================
+11. PERFORMANCE ENGINEERING
+========================================================
+
+Aim for these measurable performance objectives on defined, representative hardware:
+
+DESKTOP:
+- Target: 60 FPS at 1920x1080.
+- Frame budget: approximately 16.7 ms.
+- Target smooth camera motion and interactions.
+- Higher refresh rates are optional enhancements.
+
+MOBILE:
+- Target: 60 FPS on capable modern phones using adaptive quality.
+- Minimum practical target: sustained 30 FPS on representative supported phones.
+- 30 FPS frame budget: approximately 33.3 ms.
+- Avoid pronounced input latency, thermal instability, or repeated frame stalls.
+
+These are engineering targets, not guarantees independent of hardware.
+
+IMPLEMENT:
+- Adaptive device pixel ratio
+- Low, medium, and high quality profiles
+- Automatic performance regression when frame times worsen
+- Selective shadow-quality reduction
+- Reduced postprocessing on lower tiers
+- Instanced meshes for repeated objects
+- Geometry and material reuse
+- Texture compression where supported
+- Mesh compression where appropriate
+- Object culling and level of detail
+- Lazy loading of noncritical assets
+- Resource disposal and cleanup
+- Efficient animation loops
+- GPU-efficient particle effects
+
+Avoid per-frame React state updates for high-frequency 3D transformations.
+
+Use references, useFrame, direct Three.js mutation, shader uniforms, or appropriate simulation state systems.
+
+Avoid unnecessary allocations in frame loops.
+
+Instrument performance rather than assuming an optimization is effective.
+
+Record:
+- Median FPS
+- 1% low FPS or equivalent frame-time tail metric
+- Approximate draw calls
+- Triangle counts where useful
+- Texture and asset transfer sizes
+- JavaScript heap trends where measurable
+- Startup and scene-ready times
+- Browser console errors
+
+Measure on actual devices where accessible.
+
+Do not claim physical iPhone performance has been verified if testing only occurred through desktop mobile emulation.
+
+Prioritize consistent frame delivery and responsive interaction over maximal graphical complexity.
+
+========================================================
+12. PERFORMANCE AND GRAPHICS QUALITY TIERS
+========================================================
+
+Create a centralized graphics configuration system.
+
+HIGH:
+- Enhanced shadows
+- Richer particles
+- Full appropriate postprocessing
+- Higher resolution
+- Longer LOD distances
+- Greater environmental detail
+
+MEDIUM:
+- Reduced shadow resolution
+- Moderate particles
+- Selected postprocessing
+- Adaptive pixel ratio
+- Balanced LOD distances
+
+LOW:
+- Minimal expensive postprocessing
+- Reduced particles
+- Simplified shadow strategy
+- Lower rendering resolution
+- Aggressive LOD and instancing
+- Reduced dynamic-light complexity
+
+Preserve the visual identity across all tiers.
+
+The low profile must still look like the same professionally designed game.
+
+Provide automatic selection and allow manual override where practical.
+
+========================================================
+13. PREMIUM UI/UX INTEGRATION
+========================================================
+
+The interface should complement the 3D art direction.
+
+Use:
+- Consistent typography
+- Clear information hierarchy
+- Carefully designed panels and overlays
+- Attractive button states
+- Responsive transitions
+- Contextual tooltips where appropriate
+- Elegant status indicators
+- Suitable contrast against moving backgrounds
+
+Avoid large, opaque UI containers that unnecessarily obscure the scene.
+
+On desktop, maximize visual immersion without compromising control clarity.
+
+On mobile, prioritize the primary interaction and make secondary features unobtrusive.
+
+Create satisfying microinteractions and clear feedback.
+
+Use semantic HTML controls when practical to maintain usability and accessibility.
+
+========================================================
+14. VISUAL VERIFICATION & ITERATIVE IMPROVEMENT
+========================================================
+
+This requirement is mandatory.
+
+A successful build does NOT mean the graphics are good.
+
+Use an iterative visual inspection process.
+
+When browser automation and screenshot capture are available:
+
+1. Start the application.
+2. Capture a desktop screenshot.
+3. Capture mobile portrait and landscape screenshots.
+4. Capture the initial scene.
+5. Capture the scene during an animated event.
+6. Capture the scene after a meaningful interaction.
+7. Inspect the actual rendered output.
+8. Identify deficiencies in composition, geometry, lighting, texture quality, animation, framing, and UI.
+9. Correct the deficiencies.
+10. Repeat for at least three meaningful visual-improvement iterations where feasible.
+
+Use Playwright or an equivalent browser inspection tool when available.
+
+For repeatable visual tests, stabilize nondeterministic animation, timing, randomness, and browser conditions.
+
+When tools cannot inspect screenshots directly, generate the available artifacts, execute the available tests, and clearly identify what remains unverified.
+
+Never claim visual validation was performed when no image was actually inspected.
+
+SCORING RUBRIC (1 TO 5):
+- Art direction and visual cohesion
+- Geometry and material quality
+- Lighting and depth
+- Environmental richness
+- Animation and liveliness
+- Interaction quality
+- Camera behavior
+- Mobile appearance
+- Performance and fluidity
+
+Aim for at least 4/5 in each area under genuine inspection.
+
+Scores are evaluation aids, not evidence by themselves.
+
+Do not fabricate measurements or assessments to meet the score.
+
+========================================================
+15. FUNCTIONAL TESTING
+========================================================
+
+Verify:
+- TypeScript and production build pass
+- No runtime exceptions in primary flows
+- No WebGL shader compilation errors
+- No missing assets or textures
+- No persistent broken animations
+- Input works with mouse, keyboard where appropriate, and touch
+- Physics and collisions behave as designed
+- Scene survives resize and device orientation changes
+- Graphics settings can be changed
+- Browser suspension and restoration are handled
+- Interaction remains possible while effects are running
+- Reduced-motion and accessibility behavior are considered
+- Existing gameplay has not regressed
+
+Create automated smoke tests and visual regression tests where practical.
+
+Check the final production build, not merely the development server.
+
+========================================================
+16. IMPLEMENTATION STRATEGY — AVOID TIMEOUTS
+========================================================
+
+Work methodically in bounded phases.
+
+PHASE 1: REPOSITORY AUDIT
+Inspect the codebase, identify constraints, preserve existing features, and document a concise technical plan.
+
+PHASE 2: ART DIRECTION
+Define the visual direction, scene composition, asset plan, animation language, and measurable acceptance criteria.
+
+PHASE 3: GRAPHICS FOUNDATION
+Implement camera, lighting, renderer configuration, materials, environment, and rendering architecture.
+
+PHASE 4: SCENE & ASSET PRODUCTION
+Create or integrate polished scene geometry, environment details, and visual composition.
+
+PHASE 5: ANIMATION & INTERACTION
+Implement meaningful motion, responsive controls, physical behavior, and feedback.
+
+PHASE 6: POSTPROCESSING & CINEMATIC POLISH
+Add and tune shadows, atmosphere, color, effects, and final visual details.
+
+PHASE 7: MOBILE OPTIMIZATION
+Implement mobile-specific layout, camera framing, adaptive quality, and touch controls.
+
+PHASE 8: TESTING & VISUAL IMPROVEMENT
+Run tests, inspect screenshots, evaluate performance, fix defects, and refine.
+
+PHASE 9: PRODUCTION READINESS
+Verify production builds, document findings and limitations, and prepare deployment.
+
+Maintain:
+- docs/3D_VISUAL_STANDARD.md
+- docs/3D_IMPLEMENTATION_PLAN.md
+- docs/3D_QUALITY_REPORT.md
+
+Update the implementation plan as work progresses.
+
+If Git is configured, create logical commits after completed, validated phases. Do not commit secrets, generated caches, or unnecessary binaries.
+
+Do not attempt a massive one-shot rewrite when smaller validated steps are more reliable.
+
+Do not abandon visual quality simply because the scene is technically functional.
+
+========================================================
+17. FINAL ACCEPTANCE CRITERIA
+========================================================
+
+The implementation is ready only when:
+
+[ ] The scene demonstrates a coherent premium art direction.
+[ ] The initial camera view is visually impressive.
+[ ] Models and environment assets look intentional and finished.
+[ ] Materials and lighting have meaningful depth.
+[ ] The experience contains purposeful animation.
+[ ] Interactions are intuitive and visibly responsive.
+[ ] Desktop and mobile layouts are both attractive.
+[ ] The scene has appropriate graphics-quality scaling.
+[ ] The app passes production build checks.
+[ ] Automated interaction tests pass where supported.
+[ ] Visual screenshots have been reviewed where tooling permits.
+[ ] Performance results are measured where supported.
+[ ] Known compromises and unverifiable conditions are documented.
+[ ] Existing required functionality remains intact.
+
+Do not substitute a status report, a mockup, or a static screenshot for working interactive 3D software.
+
+Deliver the actual implementation.
+
+BEGIN:
+Inspect the repository, choose or validate the art direction, create the execution plan, and implement it phase by phase.
+
+Use sound technical judgment. Make decisions autonomously when constraints are not specified. Ask for additional information only if a missing requirement makes meaningful implementation impossible.
+
+Quality is a deliverable.
+Visual coherence is a deliverable.
+Fluid motion is a deliverable.
+Performance is a deliverable.
+A compiling renderer alone is not the deliverable.
